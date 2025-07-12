@@ -21,6 +21,7 @@ const handleImageError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
 };
 
 const ChannelCard: React.FC<ChannelCardProps> = ({ channel, onDelete, onEdit, layout }) => {
+const ChannelCard: React.FC<ChannelCardProps> = ({ channel, onDelete, onEdit, onBacklogEdit, layout }) => {
   const handleEditClick = (e: React.MouseEvent) => {
     e.stopPropagation();
     onEdit(channel);
