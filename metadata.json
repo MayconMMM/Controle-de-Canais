@@ -1,0 +1,5 @@
+{
+  "name": "Channel Organizer",
+  "description": "An application to organize channels and their associated websites/tools in a visually appealing and functional layout. Users can add, view, and manage their channels, with each channel having quick-access links to its resources.",
+  "requestFramePermissions": []
+}

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Channel Organizer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style type="text/tailwindcss">
+      @layer base {
+        :root, [data-theme='teal'] {
+          --color-brand-primary: 173 98% 30%;
+          --color-brand-secondary: 173 80% 40%;
+          --color-base-100: 222 47% 11%;
+          --color-base-200: 223 39% 18%;
+          --color-base-300: 220 29% 28%;
+        }
+        [data-theme='indigo'] {
+          --color-brand-primary: 232 90% 64%;
+          --color-brand-secondary: 232 97% 71%;
+          --color-base-100: 222 47% 11%;
+          --color-base-200: 223 39% 18%;
+          --color-base-300: 220 29% 28%;
+        }
+        [data-theme='crimson'] {
+          --color-brand-primary: 348 91% 54%;
+          --color-brand-secondary: 347 100% 67%;
+          --color-base-100: 22 18% 13%;
+          --color-base-200: 22 16% 20%;
+          --color-base-300: 20 14% 30%;
+        }
+        [data-theme='forest'] {
+            --color-brand-primary: 138 61% 36%;
+            --color-brand-secondary: 145 78% 41%;
+            --color-base-100: 204 12% 16%;
+            --color-base-200: 204 10% 23%;
+            --color-base-300: 204 9% 33%;
+        }
+        [data-theme='violet'] {
+            --color-brand-primary: 262 82% 57%;
+            --color-brand-secondary: 262 90% 67%;
+            --color-base-100: 222 47% 11%;
+            --color-base-200: 223 39% 18%;
+            --color-base-300: 220 29% 28%;
+        }
+        [data-theme='orange'] {
+            --color-brand-primary: 24 96% 54%;
+            --color-brand-secondary: 24 100% 64%;
+            --color-base-100: 222 47% 11%;
+            --color-base-200: 223 39% 18%;
+            --color-base-300: 220 29% 28%;
+        }
+        [data-theme='gold'] {
+            --color-brand-primary: 45 93% 47%;
+            --color-brand-secondary: 45 100% 57%;
+            --color-base-100: 22 18% 13%;
+            --color-base-200: 22 16% 20%;
+            --color-base-300: 20 14% 30%;
+        }
+        [data-theme='slate'] {
+            --color-brand-primary: 215 14% 65%;
+            --color-brand-secondary: 217 27% 80%;
+            --color-base-100: 222 47% 11%;
+            --color-base-200: 223 39% 18%;
+            --color-base-300: 220 29% 28%;
+        }
+      }
+    </style>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              'brand-primary': 'hsl(var(--color-brand-primary) / <alpha-value>)',
+              'brand-secondary': 'hsl(var(--color-brand-secondary) / <alpha-value>)',
+              'base-100': 'hsl(var(--color-base-100) / <alpha-value>)',
+              'base-200': 'hsl(var(--color-base-200) / <alpha-value>)',
+              'base-300': 'hsl(var(--color-base-300) / <alpha-value>)',
+            },
+            keyframes: {
+              'slide-in-right': {
+                '0%': { transform: 'translateX(100%)', opacity: '0' },
+                '100%': { transform: 'translateX(0)', opacity: '1' },
+              },
+              'slide-out-right': {
+                '0%': { transform: 'translateX(0)', opacity: '1' },
+                '100%': { transform: 'translateX(100%)', opacity: '0' },
+              },
+            },
+            animation: {
+              'slide-in-right': 'slide-in-right 0.3s ease-out forwards',
+              'slide-out-right': 'slide-out-right 0.3s ease-in forwards',
+            }
+          }
+        }
+      }
+    </script>
+  <script type="importmap">
+{
+  "imports": {
+    "react-dom/": "https://esm.sh/react-dom@^19.1.0/",
+    "react/": "https://esm.sh/react@^19.1.0/",
+    "react": "https://esm.sh/react@^19.1.0"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+  <body class="bg-base-100 text-slate-300">
+    <div id="root"></div>
+    <script type="module" src="/index.tsx"></script>
+  </body>
+</html>
