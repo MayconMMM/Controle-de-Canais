@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
@@ -30,39 +30,39 @@
           --color-base-300: 20 14% 30%;
         }
         [data-theme='forest'] {
-            --color-brand-primary: 138 61% 36%;
-            --color-brand-secondary: 145 78% 41%;
-            --color-base-100: 204 12% 16%;
-            --color-base-200: 204 10% 23%;
-            --color-base-300: 204 9% 33%;
+          --color-brand-primary: 138 61% 36%;
+          --color-brand-secondary: 145 78% 41%;
+          --color-base-100: 204 12% 16%;
+          --color-base-200: 204 10% 23%;
+          --color-base-300: 204 9% 33%;
         }
         [data-theme='violet'] {
-            --color-brand-primary: 262 82% 57%;
-            --color-brand-secondary: 262 90% 67%;
-            --color-base-100: 222 47% 11%;
-            --color-base-200: 223 39% 18%;
-            --color-base-300: 220 29% 28%;
+          --color-brand-primary: 262 82% 57%;
+          --color-brand-secondary: 262 90% 67%;
+          --color-base-100: 222 47% 11%;
+          --color-base-200: 223 39% 18%;
+          --color-base-300: 220 29% 28%;
         }
         [data-theme='orange'] {
-            --color-brand-primary: 24 96% 54%;
-            --color-brand-secondary: 24 100% 64%;
-            --color-base-100: 222 47% 11%;
-            --color-base-200: 223 39% 18%;
-            --color-base-300: 220 29% 28%;
+          --color-brand-primary: 24 96% 54%;
+          --color-brand-secondary: 24 100% 64%;
+          --color-base-100: 222 47% 11%;
+          --color-base-200: 223 39% 18%;
+          --color-base-300: 220 29% 28%;
         }
         [data-theme='gold'] {
-            --color-brand-primary: 45 93% 47%;
-            --color-brand-secondary: 45 100% 57%;
-            --color-base-100: 22 18% 13%;
-            --color-base-200: 22 16% 20%;
-            --color-base-300: 20 14% 30%;
+          --color-brand-primary: 45 93% 47%;
+          --color-brand-secondary: 45 100% 57%;
+          --color-base-100: 22 18% 13%;
+          --color-base-200: 22 16% 20%;
+          --color-base-300: 20 14% 30%;
         }
         [data-theme='slate'] {
-            --color-brand-primary: 215 14% 65%;
-            --color-brand-secondary: 217 27% 80%;
-            --color-base-100: 222 47% 11%;
-            --color-base-200: 223 39% 18%;
-            --color-base-300: 220 29% 28%;
+          --color-brand-primary: 215 14% 65%;
+          --color-brand-secondary: 217 27% 80%;
+          --color-base-100: 222 47% 11%;
+          --color-base-200: 223 39% 18%;
+          --color-base-300: 220 29% 28%;
         }
       }
     </style>
@@ -86,28 +86,23 @@
                 '0%': { transform: 'translateX(0)', opacity: '1' },
                 '100%': { transform: 'translateX(100%)', opacity: '0' },
               },
+              'fade-in-up': {
+                '0%': { transform: 'translateY(20px)', opacity: '0' },
+                '100%': { transform: 'translateY(0)', opacity: '1' },
+              }
             },
             animation: {
               'slide-in-right': 'slide-in-right 0.3s ease-out forwards',
               'slide-out-right': 'slide-out-right 0.3s ease-in forwards',
+              'fade-in-up': 'fade-in-up 0.3s ease-out forwards',
             }
           }
         }
       }
     </script>
-  <script type="importmap">
-{
-  "imports": {
-    "react-dom/": "https://esm.sh/react-dom@^19.1.0/",
-    "react/": "https://esm.sh/react@^19.1.0/",
-    "react": "https://esm.sh/react@^19.1.0"
-  }
-}
-</script>
-<link rel="stylesheet" href="/index.css">
-</head>
+  </head>
   <body class="bg-base-100 text-slate-300">
     <div id="root"></div>
-    <script type="module" src="/index.tsx"></script>
+    <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
