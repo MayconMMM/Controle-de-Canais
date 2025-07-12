@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import useLocalStorage from './hooks/useLocalStorage';
+import useLocalStorage from './useLocalStorage';
 import { Channel } from './types';
 import ChannelCard from './components/ChannelCard';
 import AddChannelModal from './components/AddChannelModal';
