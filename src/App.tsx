@@ -7,6 +7,7 @@ import Button from './components/Button';
 import PlusIcon from './components/icons/PlusIcon';
 import CogIcon from './components/icons/CogIcon';
 import SettingsSidebar from './components/SettingsSidebar';
+import BacklogModal from './components/BacklogModal';
 
 const initialChannels: Channel[] = [
   {
@@ -51,6 +52,8 @@ const App: React.FC = () => {
   const [theme, setTheme] = useLocalStorage<string>('theme', 'teal');
   const [layout, setLayout] = useLocalStorage<'grid' | 'list'>('layout', 'grid');
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
+  const [isBacklogModalOpen, setIsBacklogModalOpen] = useState(false);
+  const [channelForBacklog, setChannelForBacklog] = useState<Channel | null>(null);
 
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);
@@ -64,6 +67,16 @@ const App: React.FC = () => {
   const handleOpenEditModal = (channel: Channel) => {
     setChannelToEdit(channel);
     setIsModalOpen(true);
+  };
+
+  const handleOpenBacklogModal = (channel: Channel) => {
+    setChannelForBacklog(channel);
+    setIsBacklogModalOpen(true);
+  };
+
+  const handleCloseBacklogModal = () => {
+    setIsBacklogModalOpen(false);
+    setChannelForBacklog(null);
   };
 
   const handleCloseModal = () => {
@@ -84,6 +97,18 @@ const App: React.FC = () => {
         id: crypto.randomUUID(),
       };
       setChannels(prevChannels => [...prevChannels, newChannel]);
+    }
+  };
+
+  const handleSaveBacklog = (backlogData: { totalVideos: number; videosPerDay: number; lastUpdated: string }) => {
+    if (channelForBacklog) {
+      setChannels(prevChannels =>
+        prevChannels.map(c =>
+          c.id === channelForBacklog.id 
+            ? { ...c, backlog: backlogData }
+            : c
+        )
+      );
     }
   };
 
@@ -130,6 +155,7 @@ const App: React.FC = () => {
                 channel={channel}
                 onDelete={handleDeleteChannel}
                 onEdit={handleOpenEditModal}
+                onBacklogEdit={handleOpenBacklogModal}
                 layout={layout}
               />
             ))}
@@ -155,6 +181,13 @@ const App: React.FC = () => {
         onThemeChange={setTheme}
         currentLayout={layout}
         onLayoutChange={setLayout}
+      />
+      <BacklogModal
+        isOpen={isBacklogModalOpen}
+        onClose={handleCloseBacklogModal}
+        onSave={handleSaveBacklog}
+        currentBacklog={channelForBacklog?.backlog}
+        channelName={channelForBacklog?.name || ''}
       />
     </div>
   );

@@ -15,4 +15,9 @@ export interface Channel {
   imageUrl: string;
   country: Country;
   tools: Tool[];
+  backlog?: {
+    totalVideos: number;
+    videosPerDay: number;
+    lastUpdated: string;
+  };
 }

@@ -215,6 +215,14 @@ const AddChannelModal: React.FC<AddChannelModalProps> = ({ isOpen, onClose, onSa
           <div className="flex justify-end pt-4">
             <Button type="submit">{isEditing ? 'Salvar Alterações' : 'Salvar Canal'}</Button>
           </div>
+          
+          {isEditing && (
+            <div className="text-center pt-2">
+              <p className="text-slate-400 text-sm">
+                💡 Use o ícone de vídeo no canal para configurar o backlog de vídeos
+              </p>
+            </div>
+          )}
         </form>
       </div>
     </div>

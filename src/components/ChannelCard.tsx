@@ -1,12 +1,16 @@
 import React from 'react';
 import { Channel } from '../types';
+import { calculateBacklogInfo } from '../utils/backlogCalculations';
 import TrashIcon from './icons/TrashIcon';
 import PencilIcon from './icons/PencilIcon';
+import VideoIcon from './icons/VideoIcon';
+import BacklogIndicator from './BacklogIndicator';
 
 interface ChannelCardProps {
   channel: Channel;
   onDelete: (channelId: string) => void;
   onEdit: (channel: Channel) => void;
+  onBacklogEdit: (channel: Channel) => void;
   layout: 'grid' | 'list';
 }
 
@@ -27,8 +31,20 @@ const ChannelCard: React.FC<ChannelCardProps> = ({ channel, onDelete, onEdit, la
     onDelete(channel.id);
   };
 
+  const handleBacklogClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    onBacklogEdit(channel);
+  };
+
   const actions = (
     <div className="flex gap-2">
+      <button 
+        onClick={handleBacklogClick}
+        className="bg-black bg-opacity-50 p-1.5 rounded-full text-white hover:bg-purple-600 transition-colors duration-200"
+        aria-label="Manage video backlog"
+      >
+        <VideoIcon className="w-5 h-5" />
+      </button>
       <button 
         onClick={handleEditClick}
         className="bg-black bg-opacity-50 p-1.5 rounded-full text-white hover:bg-brand-primary transition-colors duration-200"
@@ -46,9 +62,23 @@ const ChannelCard: React.FC<ChannelCardProps> = ({ channel, onDelete, onEdit, la
     </div>
   );
 
+  // Calculate backlog status for visual indicators
+  const backlogInfo = channel.backlog ? calculateBacklogInfo(
+    channel.backlog.totalVideos,
+    channel.backlog.videosPerDay,
+    channel.backlog.lastUpdated
+  ) : null;
+
+  const cardClassName = `bg-base-200 rounded-xl shadow-lg overflow-hidden flex flex-col transition-transform hover:scale-105 duration-300 ease-in-out ${
+    backlogInfo?.isCritical ? 'ring-2 ring-red-500' :
+    backlogInfo?.isLowStock ? 'ring-2 ring-yellow-500' : ''
+  }`;
   if (layout === 'list') {
     return (
-      <div className="bg-base-200 rounded-xl shadow-lg flex w-full transition-transform hover:scale-[1.02] duration-300 ease-in-out">
+      <div className={`bg-base-200 rounded-xl shadow-lg flex w-full transition-transform hover:scale-[1.02] duration-300 ease-in-out ${
+        backlogInfo?.isCritical ? 'ring-2 ring-red-500' :
+        backlogInfo?.isLowStock ? 'ring-2 ring-yellow-500' : ''
+      }`}>
         <img
           src={channel.imageUrl}
           alt={channel.name}
@@ -68,6 +98,9 @@ const ChannelCard: React.FC<ChannelCardProps> = ({ channel, onDelete, onEdit, la
               title={channel.country.name}
             />
             <h3 className="text-xl font-bold text-white truncate">{channel.name}</h3>
+            {channel.backlog && (
+              <BacklogIndicator backlog={channel.backlog} isCompact />
+            )}
           </div>
           <div className="mt-auto flex flex-wrap gap-2">
             {channel.tools.map((tool) => (
@@ -88,7 +121,7 @@ const ChannelCard: React.FC<ChannelCardProps> = ({ channel, onDelete, onEdit, la
   }
 
   return (
-    <div className="bg-base-200 rounded-xl shadow-lg overflow-hidden flex flex-col transition-transform hover:scale-105 duration-300 ease-in-out">
+    <div className={cardClassName}>
       <div className="relative">
         <img
           src={channel.imageUrl}
@@ -111,6 +144,13 @@ const ChannelCard: React.FC<ChannelCardProps> = ({ channel, onDelete, onEdit, la
           />
           <h3 className="text-xl font-bold text-white truncate">{channel.name}</h3>
         </div>
+        
+        {channel.backlog && (
+          <div className="mb-4">
+            <BacklogIndicator backlog={channel.backlog} />
+          </div>
+        )}
+        
         <div className="mt-auto grid grid-cols-1 sm:grid-cols-2 gap-2">
           {channel.tools.map((tool) => (
             <a
